@@ -1,214 +1,150 @@
 {% extends "base.html" %}
 
-{% block title %}Projets - Jonathan Kakesa | Cognito Inc.{% endblock %}
+{% block title %}Projets & écosystème — Cognito Inc.{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="py-20 bg-gradient-to-r from-dark-bg to-dark-card">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-5xl font-bold mb-6 gradient-text">Mes Projets</h1>
-            <p class="text-xl text-gray-300">Découvrez mes réalisations et innovations technologiques</p>
-        </div>
+<section class="py-20 section-trigger">
+    <div class="max-w-5xl mx-auto px-6 text-center space-y-6">
+        <p class="badge text-slate">Écosystème Cognito</p>
+        <h1 class="text-4xl font-semibold">Plateformes propriétaires, sites live & open source</h1>
+        <p class="text-slate text-lg">Chaque projet respecte la palette bleu électrique du logo Cognito Inc. et raconte l'histoire d'une organisation ambitieuse.</p>
     </div>
 </section>
 
-<!-- Projects Grid -->
-<section class="py-20">
-    <div class="container mx-auto px-6">
-        {% if projects %}
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for project in projects %}
-            <div class="project-card bg-dark-card rounded-lg overflow-hidden border border-dark-border hover:border-electric-blue transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-electric-blue/20 group">
-                <!-- Project Image/Icon -->
-                <div class="h-48 bg-gradient-to-br from-electric-blue to-blue-600 flex items-center justify-center relative overflow-hidden">
-                    <div class="text-6xl font-bold text-dark-bg group-hover:scale-110 transition-transform duration-300">
-                        {{ project.name[:2] }}
-                    </div>
-                    <!-- Overlay effect -->
-                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                
-                <!-- Project Content -->
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-3 gradient-text group-hover:text-electric-blue transition-colors">
-                        {{ project.name }}
-                    </h3>
-                    <p class="text-gray-400 mb-4 leading-relaxed">{{ project.description }}</p>
-                    
-                    <!-- Tech Stack -->
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        {% for tech in project.stack.split(', ') %}
-                        <span class="bg-electric-blue/20 text-electric-blue px-2 py-1 rounded text-sm hover:bg-electric-blue/30 transition-colors">
-                            {{ tech }}
-                        </span>
-                        {% endfor %}
-                    </div>
-                    
-                    <!-- Project Links -->
-                    <div class="flex items-center justify-between">
-                        <a href="{{ project.github_url }}" target="_blank" class="inline-flex items-center text-electric-blue hover:text-blue-400 transition-colors group/link">
-                            <svg class="w-5 h-5 mr-2 group-hover/link:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                            GitHub
-                        </a>
-                        
-                        <div class="text-sm text-gray-500">
-                            {{ project.created_at.strftime('%Y') }}
+<section class="py-12 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+        <div class="flex items-end justify-between gap-4">
+            <div>
+                <p class="badge text-slate mb-2">Spotlight</p>
+                <h2 class="text-3xl font-semibold">Programmation, mécatronique et IA</h2>
+            </div>
+            <span class="text-slate text-sm">Cartes cliquables → Détails & GitHub</span>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+            {% for project in spotlight_projects %}
+                <div class="project-preview" style="background-image: url('{{ project.image }}');">
+                    <div class="p-6 flex flex-col h-full justify-end">
+                        <p class="text-xs uppercase tracking-[0.35em] text-slate">{{ project.category }}</p>
+                        <h3 class="text-2xl font-semibold text-white mt-2">{{ project.title }}</h3>
+                        <p class="text-slate mt-3">{{ project.summary }}</p>
+                        <div class="flex flex-wrap gap-2 mt-4 text-xs text-slate">
+                            {% for tech in project.tech %}
+                                <span class="badge-pill">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="flex items-center gap-4 mt-6">
+                            <a href="{{ project.case_url }}" target="_blank" rel="noreferrer" class="text-aurora text-sm">Voir les détails</a>
+                            <a href="{{ project.github_url }}" target="_blank" rel="noreferrer" class="text-aurora text-sm">GitHub</a>
                         </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
-        {% else %}
-        <!-- Empty State -->
-        <div class="text-center py-20">
-            <div class="w-24 h-24 mx-auto mb-8 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                <svg class="w-12 h-12 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                </svg>
-            </div>
-            <h3 class="text-2xl font-bold mb-4 gradient-text">Projets en cours de chargement</h3>
-            <p class="text-gray-400 mb-8">De nouveaux projets passionnants arrivent bientôt !</p>
-            <a href="{{ url_for('contact') }}" class="bg-electric-blue hover:bg-blue-500 text-dark-bg font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
-                Discuter d'un projet
-            </a>
-        </div>
-        {% endif %}
     </div>
 </section>
 
-<!-- Project Categories -->
-<section class="py-20 bg-dark-card">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4 gradient-text">Domaines d'Expertise</h2>
-            <p class="text-lg text-gray-400">Les technologies et secteurs dans lesquels j'excelle</p>
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+        <div class="flex items-end justify-between gap-4">
+            <div>
+                <p class="badge text-slate mb-2">Plateformes propriétaires</p>
+                <h2 class="text-3xl font-semibold">R&D maison | Flask, IA, data</h2>
+            </div>
+            <span class="text-slate text-sm">{{ projects|length }} fiches</span>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Web Applications -->
-            <div class="text-center p-6 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300 group">
-                <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue/20 rounded-full flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9"></path>
-                    </svg>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {% for project in projects %}
+                <div class="project-card rounded-3xl p-6 flex flex-col">
+                    <div class="rounded-2xl overflow-hidden mb-4 h-48 bg-white/5">
+                        <img src="{{ project.image_url }}" alt="{{ project.name }}" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                    </div>
+                    <div class="text-xs uppercase tracking-[0.35em] text-slate mb-3">{{ project.stack }}</div>
+                    <h3 class="text-xl font-semibold mb-2">{{ project.name }}</h3>
+                    <p class="text-slate mb-4">{{ project.description }}</p>
+                    <div class="text-sm text-slate mb-4">Lancé en {{ project.created_at.strftime('%Y') }}</div>
+                    <div class="flex items-center gap-3 mt-auto">
+                        <a href="{{ url_for('project_detail', project_id=project.id) }}" class="px-4 py-2 rounded-full border border-white/15 text-sm">Détails</a>
+                        {% if project.github_url %}
+                            <a href="{{ project.github_url }}" target="_blank" rel="noreferrer" class="px-4 py-2 rounded-full bg-aurora text-midnight text-sm">GitHub</a>
+                        {% endif %}
+                    </div>
                 </div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-electric-blue transition-colors">Applications Web</h3>
-                <p class="text-gray-400 text-sm">Plateformes web modernes et performantes</p>
-            </div>
-            
-            <!-- AI Solutions -->
-            <div class="text-center p-6 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300 group">
-                <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue/20 rounded-full flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                    </svg>
+            {% else %}
+                <div class="col-span-full glass-panel rounded-3xl p-10 text-center text-slate">
+                    Ajoutez vos projets depuis l'admin pour les voir apparaître ici.
                 </div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-electric-blue transition-colors">Solutions IA</h3>
-                <p class="text-gray-400 text-sm">Intelligence artificielle et machine learning</p>
-            </div>
-            
-            <!-- E-Commerce -->
-            <div class="text-center p-6 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300 group">
-                <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue/20 rounded-full flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-electric-blue transition-colors">E-Commerce</h3>
-                <p class="text-gray-400 text-sm">Boutiques en ligne et marketplaces</p>
-            </div>
-            
-            <!-- Analytics -->
-            <div class="text-center p-6 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300 group">
-                <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue/20 rounded-full flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-electric-blue transition-colors">Analytics</h3>
-                <p class="text-gray-400 text-sm">Tableaux de bord et visualisation de données</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- Technologies Used -->
-<section class="py-20">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4 gradient-text">Technologies Utilisées</h2>
-            <p class="text-lg text-gray-400">Stack technique moderne pour des solutions performantes</p>
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+        <div class="flex items-end justify-between gap-4">
+            <div>
+                <p class="badge text-slate mb-2">Expériences live</p>
+                <h2 class="text-3xl font-semibold">Sites opérationnels (sélection)</h2>
+            </div>
+            <p class="text-slate text-sm">Cognito-inc.ca • ulc-cognito-web • primaphoto • cognito-chatt • questions-pour-un-disciple • lyft-icc • green-kin</p>
         </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-            <!-- Python -->
-            <div class="text-center group">
-                <div class="w-16 h-16 mx-auto mb-3 bg-electric-blue/20 rounded-lg flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <span class="text-2xl font-bold text-electric-blue">Py</span>
+        <div class="grid lg:grid-cols-3 gap-6">
+            {% for site in portfolio_sites %}
+                <div class="project-card rounded-3xl p-6 flex flex-col">
+                    <div class="flex items-center justify-between text-xs text-slate mb-4">
+                        <span>{{ site.status }}</span>
+                        <span>{{ site.sector }}</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">{{ site.name }}</h3>
+                    <p class="text-slate flex-1">{{ site.description }}</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        {% for tech in site.stack %}
+                            <span class="repo-chip text-xs">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="mt-6 flex items-center justify-between text-sm">
+                        <span class="text-slate">Signature Cognito</span>
+                        <a href="{{ site.url }}" target="_blank" rel="noreferrer" class="text-aurora hover:underline">Ouvrir</a>
+                    </div>
                 </div>
-                <p class="text-sm text-gray-400 group-hover:text-electric-blue transition-colors">Python</p>
-            </div>
-            
-            <!-- Flask -->
-            <div class="text-center group">
-                <div class="w-16 h-16 mx-auto mb-3 bg-electric-blue/20 rounded-lg flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <span class="text-2xl font-bold text-electric-blue">Fl</span>
-                </div>
-                <p class="text-sm text-gray-400 group-hover:text-electric-blue transition-colors">Flask</p>
-            </div>
-            
-            <!-- React -->
-            <div class="text-center group">
-                <div class="w-16 h-16 mx-auto mb-3 bg-electric-blue/20 rounded-lg flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <span class="text-2xl font-bold text-electric-blue">Re</span>
-                </div>
-                <p class="text-sm text-gray-400 group-hover:text-electric-blue transition-colors">React</p>
-            </div>
-            
-            <!-- Node.js -->
-            <div class="text-center group">
-                <div class="w-16 h-16 mx-auto mb-3 bg-electric-blue/20 rounded-lg flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <span class="text-2xl font-bold text-electric-blue">Nd</span>
-                </div>
-                <p class="text-sm text-gray-400 group-hover:text-electric-blue transition-colors">Node.js</p>
-            </div>
-            
-            <!-- PostgreSQL -->
-            <div class="text-center group">
-                <div class="w-16 h-16 mx-auto mb-3 bg-electric-blue/20 rounded-lg flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <span class="text-2xl font-bold text-electric-blue">PG</span>
-                </div>
-                <p class="text-sm text-gray-400 group-hover:text-electric-blue transition-colors">PostgreSQL</p>
-            </div>
-            
-            <!-- Docker -->
-            <div class="text-center group">
-                <div class="w-16 h-16 mx-auto mb-3 bg-electric-blue/20 rounded-lg flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <span class="text-2xl font-bold text-electric-blue">Dk</span>
-                </div>
-                <p class="text-sm text-gray-400 group-hover:text-electric-blue transition-colors">Docker</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-20 bg-gradient-to-r from-electric-blue to-blue-600">
-    <div class="container mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold mb-4 text-dark-bg">Vous avez un projet en tête ?</h2>
-        <p class="text-lg mb-8 text-dark-bg/80">Transformons votre vision en réalité avec des technologies de pointe</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="{{ url_for('contact') }}" class="bg-dark-bg text-electric-blue font-bold py-4 px-8 rounded-lg hover:bg-gray-900 transition-all duration-300 transform hover:scale-105">
-                Démarrer un projet
-            </a>
-            <a href="{{ url_for('services') }}" class="border-2 border-dark-bg text-dark-bg hover:bg-dark-bg hover:text-electric-blue font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
-                Voir mes services
-            </a>
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+        <div class="flex items-end justify-between gap-4">
+            <div>
+                <p class="badge text-slate mb-2">Github heartbeat</p>
+                <h2 class="text-3xl font-semibold">Repos publics du moment</h2>
+            </div>
+            <a href="{{ github_profile.html_url }}" target="_blank" rel="noreferrer" class="text-aurora text-sm">Profil complet →</a>
         </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+            {% for repo in github_repos %}
+                <div class="project-card rounded-3xl p-6 flex flex-col">
+                    <div class="flex items-center justify-between text-xs text-slate mb-3">
+                        <span>{{ repo.language or 'Polyglotte' }}</span>
+                        <span>{{ repo.stargazers_count }} ★</span>
+                    </div>
+                    <h3 class="text-xl font-semibold">{{ repo.name }}</h3>
+                    <p class="text-slate flex-1 mt-2">{{ repo.description or 'Expérimentation publiée par Cognito Inc.' }}</p>
+                    <div class="text-sm flex items-center justify-between mt-4">
+                        <span class="text-slate">MAJ {{ repo.pushed_at[:10] if repo.pushed_at else '' }}</span>
+                        <a href="{{ repo.html_url }}" target="_blank" rel="noreferrer" class="text-aurora hover:underline">Voir sur GitHub</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-20 section-trigger">
+    <div class="max-w-5xl mx-auto px-6 glass-panel rounded-[32px] p-10 text-center">
+        <p class="badge text-slate mb-3">Envie de collaborer ?</p>
+        <h2 class="text-3xl font-semibold mb-4">Briefez-moi sur votre prochain produit</h2>
+        <p class="text-slate mb-6">Ideation sprint, refonte complète ou lancement d’un agent IA : je bâtis l’équipe et la roadmap.</p>
+        <a href="{{ url_for('contact') }}" class="px-6 py-3 rounded-full bg-aurora text-midnight font-semibold shadow-glow">Prendre contact</a>
     </div>
 </section>
 {% endblock %}

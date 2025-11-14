@@ -1,451 +1,197 @@
-// Main JavaScript file for Cognito Inc. website
-// Animations, interactions, and dynamic behaviors
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize GSAP
+document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
-    
-    // Loading screen animation
-    initLoadingScreen();
-    
-    // Navigation functionality
+    initLoader();
     initNavigation();
-    
-    // Scroll animations
     initScrollAnimations();
-    
-    // Interactive elements
-    initInteractiveElements();
-    
-    // Form enhancements
-    initFormEnhancements();
-    
-    // Parallax effects
-    initParallaxEffects();
+    initCounters();
+    initFlashMessages();
+    initScrollToTop();
 });
 
-// Loading Screen Animation
-function initLoadingScreen() {
-    const loadingScreen = document.getElementById('loading-screen');
-    
-    if (loadingScreen) {
-        // Animate loading screen out after page load
-        window.addEventListener('load', function() {
-            gsap.to(loadingScreen, {
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.out",
-                onComplete: function() {
-                    loadingScreen.style.display = 'none';
-                    // Trigger entrance animations
-                    animatePageEntrance();
-                }
-            });
-        });
-    }
-}
-
-// Page Entrance Animations
-function animatePageEntrance() {
-    // Hero content animation
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        gsap.from(heroContent.children, {
-            y: 50,
+function initLoader() {
+    const loader = document.getElementById('loading-screen');
+    if (!loader) return;
+    window.addEventListener('load', () => {
+        gsap.to(loader, {
             opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power2.out"
+            duration: 0.8,
+            ease: 'power2.out',
+            onComplete: () => loader.remove()
         });
-    }
-    
-    // Animate navigation
-    gsap.from('nav', {
-        y: -100,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out"
+        animateHero();
     });
 }
 
-// Navigation Functionality
+function animateHero() {
+    const hero = document.querySelector('.hero-content');
+    if (!hero) return;
+    gsap.from(hero.children, {
+        y: 40,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 1,
+        ease: 'power3.out'
+    });
+}
+
 function initNavigation() {
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const nav = document.querySelector('.nav-wrapper');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
+
+    if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', () => {
             const isHidden = mobileMenu.classList.contains('hidden');
-            
-            if (isHidden) {
-                mobileMenu.classList.remove('hidden');
-                gsap.from(mobileMenu, {
-                    height: 0,
-                    opacity: 0,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            } else {
-                gsap.to(mobileMenu, {
-                    height: 0,
-                    opacity: 0,
-                    duration: 0.3,
-                    ease: "power2.out",
-                    onComplete: function() {
-                        mobileMenu.classList.add('hidden');
-                    }
-                });
-            }
+            mobileMenu.classList.toggle('hidden');
+            if (!isHidden) return;
+            gsap.fromTo(
+                mobileMenu,
+                { height: 0, opacity: 0 },
+                { height: 'auto', opacity: 1, duration: 0.3, ease: 'power2.out' }
+            );
         });
     }
-    
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-    
-    // Navigation background on scroll
-    window.addEventListener('scroll', function() {
-        const nav = document.querySelector('nav');
-        if (window.scrollY > 50) {
-            nav.classList.add('backdrop-blur-lg');
+
+    window.addEventListener('scroll', () => {
+        if (!nav) return;
+        if (window.scrollY > 24) {
+            nav.classList.add('scrolled');
         } else {
-            nav.classList.remove('backdrop-blur-lg');
+            nav.classList.remove('scrolled');
         }
     });
 }
 
-// Scroll Animations
 function initScrollAnimations() {
-    // Fade in animations for sections
-    gsap.utils.toArray('section').forEach(section => {
+    gsap.utils.toArray('.section-trigger').forEach((section) => {
         gsap.from(section, {
-            y: 50,
+            y: 60,
             opacity: 0,
             duration: 1,
+            ease: 'power2.out',
             scrollTrigger: {
                 trigger: section,
-                start: "top 80%",
-                end: "bottom 20%",
-                toggleActions: "play none none reverse"
+                start: 'top 75%'
             }
         });
     });
-    
-    // Project cards animation
+
     gsap.utils.toArray('.project-card').forEach((card, index) => {
         gsap.from(card, {
-            y: 50,
+            y: 40,
+            opacity: 0,
+            delay: index * 0.05,
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 80%'
+            }
+        });
+    });
+
+    gsap.utils.toArray('.timeline-item').forEach((item) => {
+        gsap.from(item, {
+            x: -30,
             opacity: 0,
             duration: 0.8,
+            scrollTrigger: {
+                trigger: item,
+                start: 'top 85%'
+            }
+        });
+    });
+
+    gsap.utils.toArray('.project-preview').forEach((preview) => {
+        gsap.from(preview, {
+            scale: 0.95,
+            opacity: 0,
+            duration: 0.9,
+            scrollTrigger: {
+                trigger: preview,
+                start: 'top 80%'
+            }
+        });
+    });
+
+    gsap.utils.toArray('.partner-logo').forEach((logo) => {
+        gsap.from(logo, {
+            y: 30,
+            opacity: 0,
+            duration: 0.6,
+            scrollTrigger: {
+                trigger: logo,
+                start: 'top 90%'
+            }
+        });
+    });
+
+    gsap.utils.toArray('.workflow-node').forEach((node, index) => {
+        gsap.from(node, {
+            y: 40,
+            opacity: 0,
+            duration: 0.7,
             delay: index * 0.1,
             scrollTrigger: {
-                trigger: card,
-                start: "top 85%",
-                toggleActions: "play none none reverse"
-            }
-        });
-    });
-    
-    // Service cards animation
-    gsap.utils.toArray('.service-card').forEach((card, index) => {
-        gsap.from(card, {
-            x: index % 2 === 0 ? -50 : 50,
-            opacity: 0,
-            duration: 1,
-            scrollTrigger: {
-                trigger: card,
-                start: "top 80%",
-                toggleActions: "play none none reverse"
-            }
-        });
-    });
-    
-    // Testimonial cards animation
-    gsap.utils.toArray('.testimonial-card').forEach((card, index) => {
-        gsap.from(card, {
-            scale: 0.8,
-            opacity: 0,
-            duration: 0.8,
-            delay: index * 0.2,
-            scrollTrigger: {
-                trigger: card,
-                start: "top 85%",
-                toggleActions: "play none none reverse"
-            }
-        });
-    });
-    
-    // Counter animation
-    gsap.utils.toArray('[data-counter]').forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-counter'));
-        gsap.from(counter, {
-            textContent: 0,
-            duration: 2,
-            ease: "power2.out",
-            snap: { textContent: 1 },
-            scrollTrigger: {
-                trigger: counter,
-                start: "top 80%",
-                toggleActions: "play none none reverse"
+                trigger: node,
+                start: 'top 85%'
             }
         });
     });
 }
 
-// Interactive Elements
-function initInteractiveElements() {
-    // Project card hover effects
-    document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            gsap.to(this, {
-                y: -10,
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            gsap.to(this, {
-                y: 0,
-                duration: 0.3,
-                ease: "power2.out"
-            });
-        });
-    });
-    
-    // Button hover effects
-    document.querySelectorAll('button, .btn, a[class*="bg-electric-blue"]').forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
-            gsap.to(this, {
-                scale: 1.05,
-                duration: 0.2,
-                ease: "power2.out"
-            });
-        });
-        
-        btn.addEventListener('mouseleave', function() {
-            gsap.to(this, {
-                scale: 1,
-                duration: 0.2,
-                ease: "power2.out"
-            });
-        });
-    });
-    
-    // Glow effect on hover for special elements
-    document.querySelectorAll('.gradient-text').forEach(element => {
-        element.addEventListener('mouseenter', function() {
-            gsap.to(this, {
-                textShadow: "0 0 20px #00D4FF",
-                duration: 0.3
-            });
-        });
-        
-        element.addEventListener('mouseleave', function() {
-            gsap.to(this, {
-                textShadow: "none",
-                duration: 0.3
-            });
+function initCounters() {
+    const counters = document.querySelectorAll('[data-counter]');
+    counters.forEach((counter) => {
+        const target = parseInt(counter.dataset.counter, 10);
+        ScrollTrigger.create({
+            trigger: counter,
+            start: 'top 85%',
+            onEnter: () => animateCounter(counter, target)
         });
     });
 }
 
-// Form Enhancements
-function initFormEnhancements() {
-    // Form field focus animations
-    document.querySelectorAll('input, textarea').forEach(field => {
-        field.addEventListener('focus', function() {
-            gsap.to(this, {
-                scale: 1.02,
-                duration: 0.2,
-                ease: "power2.out"
-            });
-        });
-        
-        field.addEventListener('blur', function() {
-            gsap.to(this, {
-                scale: 1,
-                duration: 0.2,
-                ease: "power2.out"
-            });
-        });
-    });
-    
-    // Form submission animation
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('input[type="submit"], button[type="submit"]');
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = 'Envoi en cours...';
-                
-                gsap.to(submitBtn, {
-                    scale: 0.95,
-                    duration: 0.1,
-                    yoyo: true,
-                    repeat: 1
-                });
+function animateCounter(element, target) {
+    gsap.fromTo(
+        { value: 0 },
+        { value: target, duration: 1.8, ease: 'power2.out',
+            onUpdate: function() {
+                element.textContent = Math.round(this.targets()[0].value).toLocaleString('fr-FR');
             }
-        });
-    });
-}
-
-// Parallax Effects
-function initParallaxEffects() {
-    // Background elements parallax
-    gsap.utils.toArray('.bg-gradient-to-r').forEach(bg => {
-        gsap.to(bg, {
-            yPercent: -50,
-            ease: "none",
-            scrollTrigger: {
-                trigger: bg,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-    });
-    
-    // Hero background animation
-    const heroSection = document.querySelector('section');
-    if (heroSection) {
-        gsap.to(heroSection.querySelectorAll('.absolute'), {
-            y: -100,
-            ease: "none",
-            scrollTrigger: {
-                trigger: heroSection,
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-    }
-}
-
-// Utility Functions
-function animateCounter(element, target, duration = 2) {
-    gsap.to(element, {
-        textContent: target,
-        duration: duration,
-        ease: "power2.out",
-        snap: { textContent: 1 },
-        onUpdate: function() {
-            element.textContent = Math.ceil(element.textContent);
         }
+    );
+}
+
+function initFlashMessages() {
+    document.querySelectorAll('[data-flash]').forEach((flash) => {
+        setTimeout(() => {
+            gsap.to(flash, {
+                x: 40,
+                opacity: 0,
+                duration: 0.4,
+                onComplete: () => flash.remove()
+            });
+        }, 4500);
     });
 }
 
-// Testimonials Carousel (if needed)
-function initTestimonialsCarousel() {
-    const testimonials = document.querySelectorAll('.testimonial-card');
-    if (testimonials.length > 2) {
-        let currentIndex = 0;
-        
-        setInterval(() => {
-            gsap.to(testimonials[currentIndex], {
-                opacity: 0,
-                x: -100,
-                duration: 0.5,
-                onComplete: function() {
-                    testimonials[currentIndex].style.display = 'none';
-                }
-            });
-            
-            currentIndex = (currentIndex + 1) % testimonials.length;
-            
-            testimonials[currentIndex].style.display = 'block';
-            gsap.from(testimonials[currentIndex], {
-                opacity: 0,
-                x: 100,
-                duration: 0.5
-            });
-        }, 5000);
-    }
-}
+function initScrollToTop() {
+    const btn = document.createElement('button');
+    btn.id = 'scroll-top';
+    btn.className = 'fixed bottom-6 right-6 w-12 h-12 rounded-full bg-aurora text-midnight shadow-glow opacity-0 pointer-events-none transition-all duration-300 z-40';
+    btn.innerHTML = '&uarr;';
+    document.body.appendChild(btn);
 
-// Flash messages auto-hide
-document.querySelectorAll('[class*="flash"]').forEach(flash => {
-    setTimeout(() => {
-        gsap.to(flash, {
-            opacity: 0,
-            x: 100,
-            duration: 0.5,
-            onComplete: function() {
-                flash.remove();
-            }
-        });
-    }, 5000);
-});
-
-// Scroll to top functionality
-function addScrollToTop() {
-    const scrollBtn = document.createElement('button');
-    scrollBtn.innerHTML = '↑';
-    scrollBtn.className = 'fixed bottom-8 right-8 w-12 h-12 bg-electric-blue text-dark-bg rounded-full font-bold opacity-0 pointer-events-none transition-all duration-300 z-50';
-    scrollBtn.id = 'scroll-to-top';
-    document.body.appendChild(scrollBtn);
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
-            scrollBtn.style.opacity = '1';
-            scrollBtn.style.pointerEvents = 'auto';
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'auto';
         } else {
-            scrollBtn.style.opacity = '0';
-            scrollBtn.style.pointerEvents = 'none';
+            btn.style.opacity = '0';
+            btn.style.pointerEvents = 'none';
         }
     });
-    
-    scrollBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
-
-// Initialize scroll to top
-addScrollToTop();
-
-// Performance optimization
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Optimized scroll handler
-const optimizedScrollHandler = debounce(function() {
-    // Handle scroll-based animations here
-}, 16); // ~60fps
-
-window.addEventListener('scroll', optimizedScrollHandler);
-
-// Console welcome message
-console.log(`
-🚀 Cognito Inc. - Jonathan Kakesa
-💻 Développé avec passion et innovation
-🌟 Contactez-moi pour vos projets : jonathan@cognito-inc.com
-`);
-
-// Export functions for potential external use
-window.CognitoAnimations = {
-    animateCounter,
-    initTestimonialsCarousel,
-    debounce
-};

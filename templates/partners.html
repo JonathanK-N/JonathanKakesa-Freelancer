@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Partenaires & collaborations — Cognito Inc.{% endblock %}
+
+{% block content %}
+<section class="py-20 section-trigger">
+    <div class="max-w-5xl mx-auto px-6 text-center space-y-6">
+        <p class="badge text-slate">Réseau</p>
+        <h1 class="text-4xl font-semibold">Des alliances stratégiques pour livrer plus vite et mieux.</h1>
+        <p class="text-slate text-lg">Universités, médias, startups, ONG et entreprises privées nous font confiance pour aligner vision et exécution.</p>
+    </div>
+</section>
+
+<section class="py-16 section-trigger">
+    <div class="max-w-6xl mx-auto px-6 glass-panel rounded-[32px] p-10">
+        <div class="grid md:grid-cols-3 gap-6 text-center text-slate">
+            <div>
+                <p class="text-4xl font-semibold text-white">4</p>
+                <p class="uppercase tracking-[0.35em] text-xs mt-2">Pays d'opération</p>
+            </div>
+            <div>
+                <p class="text-4xl font-semibold text-white">30+</p>
+                <p class="uppercase tracking-[0.35em] text-xs mt-2">Partenaires actifs</p>
+            </div>
+            <div>
+                <p class="text-4xl font-semibold text-white">7</p>
+                <p class="uppercase tracking-[0.35em] text-xs mt-2">Ventures co-construites</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+        <div class="flex items-end justify-between gap-4">
+            <div>
+                <p class="badge text-slate mb-2">Partenaires stratégiques</p>
+                <h2 class="text-3xl font-semibold">Cloud, académique, data & industrie</h2>
+            </div>
+            <span class="text-slate text-sm">AWS • Microsoft Azure • Railway • Polytechnique Montréal • ULC-ICAM • ICAM • Data-IT</span>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+            {% for partner in partner_network %}
+                <a href="{{ partner.url }}" target="_blank" rel="noreferrer" class="partner-logo">
+                    <p class="text-xs uppercase tracking-[0.35em] text-slate">{{ partner.segment }}</p>
+                    <h3 class="text-xl font-semibold text-white">{{ partner.name }}</h3>
+                    <p class="text-slate text-sm">{{ partner.tagline }}</p>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+        <div>
+            <p class="badge text-slate mb-3">Collaborations</p>
+            <h2 class="text-3xl font-semibold">Sites & programmes opérés avec nos partenaires</h2>
+        </div>
+        <div class="partners-grid">
+            {% for site in portfolio_sites %}
+                <div class="partner-card rounded-3xl p-6 flex flex-col gap-3">
+                    <div class="text-xs uppercase tracking-[0.35em] text-slate">{{ site.sector }}</div>
+                    <h3 class="text-xl font-semibold">{{ site.name }}</h3>
+                    <p class="text-slate flex-1">{{ site.description }}</p>
+                    <div class="text-sm text-slate flex items-center justify-between">
+                        <span>Status : {{ site.status }}</span>
+                        <a href="{{ site.url }}" target="_blank" rel="noreferrer" class="text-aurora">Voir</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 section-trigger">
+    <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-8">
+        <div class="service-card rounded-[32px] p-8 space-y-4">
+            <p class="badge text-slate">Ce que nous apportons</p>
+            <ul class="text-slate space-y-3">
+                <li>• Leadership produit et gouvernance.</li>
+                <li>• Designers, développeurs, data & IA engineers.</li>
+                <li>• Playbooks de delivery, QA, sécurité.</li>
+                <li>• Méthodes growth & contenus premium.</li>
+            </ul>
+        </div>
+        <div class="service-card rounded-[32px] p-8 space-y-4">
+            <p class="badge text-slate">Ce que nous recherchons</p>
+            <ul class="text-slate space-y-3">
+                <li>• Institutions ouvertes à l'innovation (ULC, ICAM...).</li>
+                <li>• Médias/ONG voulant accélérer leur impact digital.</li>
+                <li>• Startups cherchant un CTO/CPTO fractional.</li>
+                <li>• Marques créatives ayant besoin d'une équipe produit.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 section-trigger">
+    <div class="max-w-4xl mx-auto px-6 text-center glass-panel rounded-[32px] p-12">
+        <p class="badge text-slate mb-3">Rejoindre l'écosystème</p>
+        <h2 class="text-3xl font-semibold mb-4">Vous avez un réseau, une audience, un territoire à digitaliser ?</h2>
+        <p class="text-slate mb-8">Parlons de comment Cognito Inc. peut devenir votre bras armé produit et IA.</p>
+        <div class="flex flex-wrap gap-4 justify-center">
+            <a href="{{ url_for('contact') }}" class="px-6 py-3 rounded-full bg-aurora text-midnight font-semibold shadow-glow">Planifier une rencontre</a>
+            <a href="{{ url_for('services') }}" class="px-6 py-3 rounded-full border border-white/20">Voir nos offres</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

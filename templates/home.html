@@ -1,219 +1,295 @@
 {% extends "base.html" %}
 
+{% block title %}Jonathan Kakesa Nayaba — CEO & Ingénieur Cognito Inc.{% endblock %}
+
 {% block content %}
-<!-- Hero Section -->
-<section class="min-h-screen flex items-center justify-center relative overflow-hidden">
-    <!-- Background Effects -->
-    <div class="absolute inset-0 opacity-20">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-electric-blue rounded-full filter blur-3xl animate-pulse"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
-    </div>
-    
-    <div class="container mx-auto px-6 text-center relative z-10">
-        <div class="hero-content">
-            <!-- Logo Cognito Inc. -->
-            <div class="mb-8">
-                <div class="w-48 h-48 mx-auto rounded-full bg-gradient-to-r from-electric-blue to-blue-600 p-1">
-                    <div class="w-full h-full rounded-full bg-dark-bg flex items-center justify-center overflow-hidden">
-                        <img src="{{ url_for('static', filename='images/cognito-logo.png') }}" 
-                             alt="Cognito Inc. Logo" 
-                             class="w-40 h-40 object-contain">
+{% set hero_project = spotlight_projects[0] if spotlight_projects else None %}
+
+<section class="relative overflow-hidden py-16 md:py-24 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-10 hero-content">
+        <div class="hero-grid">
+            <div class="space-y-8">
+                <div class="badge text-slate tracking-[0.4em]">CEO • Ingénieur de formation</div>
+                <h1 class="text-4xl md:text-5xl font-semibold leading-tight">
+                    Jonathan Kakesa Nayaba<br>
+                    <span class="text-aurora">Ingénieur & Chief Product Architect</span> passionné de programmation et d'innovation technologique.
+                </h1>
+                <p class="text-slate text-lg leading-relaxed">
+                    4 ans à la tête de Cognito Inc., 70 produits livrés, et des programmes réalisés avec AWS, Microsoft Azure, Railway, Polytechnique Montréal, Université Loyola du Congo-ICAM, ICAM et Data-IT.
+                </p>
+                <div class="hero-tags">
+                    <span class="tag-pill">IA & Agents</span>
+                    <span class="tag-pill">Robotique</span>
+                    <span class="tag-pill">Plateformes web</span>
+                    <span class="tag-pill">Leadership produit</span>
+                </div>
+                <div class="metrics-board">
+                    <div class="metric-card">
+                        <p class="text-3xl font-semibold" data-counter="4">4</p>
+                        <p class="text-xs uppercase tracking-[0.35em] text-slate mt-2">Années XP</p>
+                    </div>
+                    <div class="metric-card">
+                        <p class="text-3xl font-semibold" data-counter="70">70</p>
+                        <p class="text-xs uppercase tracking-[0.35em] text-slate mt-2">Produits livrés</p>
+                    </div>
+                    <div class="metric-card">
+                        <p class="text-3xl font-semibold">{{ github_profile.public_repos or 0 }}</p>
+                        <p class="text-xs uppercase tracking-[0.35em] text-slate mt-2">Repos GitHub</p>
+                    </div>
+                    <div class="metric-card">
+                        <p class="text-3xl font-semibold" data-counter="12">12</p>
+                        <p class="text-xs uppercase tracking-[0.35em] text-slate mt-2">Industries</p>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Main Title -->
-            <h1 class="text-5xl md:text-7xl font-bold mb-6">
-                <span class="gradient-text">Bienvenue sur Cognito Inc.</span>
-            </h1>
-            
-            <!-- Subtitle -->
-            <p class="text-2xl md:text-3xl mb-8 text-gray-300">
-                Innovation, Technologie & <span class="gradient-text">Excellence</span>
-            </p>
-            
-            <!-- Description -->
-            <p class="text-lg md:text-xl mb-12 max-w-3xl mx-auto text-gray-400 leading-relaxed">
-                Entreprise innovante spécialisée dans le développement d'applications web et d'intelligence artificielle. 
-                Nous transformons vos idées en solutions technologiques de pointe qui propulsent votre business vers le futur.
-            </p>
-            
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ url_for('projects') }}" class="bg-electric-blue hover:bg-blue-500 text-dark-bg font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-electric-blue/50">
-                    Voir mes projets
-                </a>
-                <a href="{{ url_for('contact') }}" class="border-2 border-electric-blue text-electric-blue hover:bg-electric-blue hover:text-dark-bg font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
-                    Me contacter
-                </a>
-            </div>
-        </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <svg class="w-6 h-6 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-        </div>
-    </div>
-</section>
-
-
-
-<!-- Featured Projects Section -->
-<section class="py-20">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4 gradient-text">Projets Phares</h2>
-            <p class="text-lg text-gray-400">Découvrez quelques-unes de mes réalisations les plus innovantes</p>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-8">
-            {% for project in projects %}
-            <a href="{{ url_for('project_detail', project_id=project.id) }}" class="project-card bg-dark-card rounded-lg overflow-hidden border border-dark-border hover:border-electric-blue transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-electric-blue/20 block group">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="{{ project.image_url }}" 
-                         alt="{{ project.name }}" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                    <div class="w-full h-full bg-gradient-to-r from-electric-blue to-blue-600 flex items-center justify-center text-4xl font-bold text-dark-bg" style="display:none;">
-                        {{ project.name[:2] }}
-                    </div>
-                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="flex flex-wrap gap-4">
+                    <a href="{{ url_for('projects') }}" class="px-6 py-3 rounded-full bg-aurora text-midnight font-semibold shadow-glow hover:scale-105 transition">Voir les projets</a>
+                    <a href="{{ url_for('services') }}" class="px-6 py-3 rounded-full border border-white/20 text-white hover:bg-white/5 transition">Comprendre ma méthode</a>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-3 gradient-text group-hover:text-electric-blue transition-colors">{{ project.name }}</h3>
-                    <p class="text-gray-400 mb-4">{{ project.description }}</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        {% for tech in project.stack.split(', ') %}
-                        <span class="bg-electric-blue/20 text-electric-blue px-2 py-1 rounded text-sm">{{ tech }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="inline-flex items-center text-electric-blue group-hover:text-blue-400 transition-colors">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        Voir les détails
+            </div>
+            <div class="space-y-6">
+                <div class="hero-card space-y-5">
+                    <p class="text-xs uppercase tracking-[0.35em] text-slate">Focus 2025</p>
+                    <h2 class="text-2xl font-semibold">Plateformes intelligentes, mécatronique et IA générative.</h2>
+                    <ul class="text-slate space-y-2 text-sm">
+                        <li>• Architecte de solutions AWS/Azure • Partenaire Railway.</li>
+                        <li>• Programmes académiques Polytechnique Montréal & ULC-ICAM.</li>
+                        <li>• Coaching founders et CTO pour industrialiser les produits Cognito.</li>
+                    </ul>
+                    <div class="flex gap-3 text-sm pt-2">
+                        <a href="https://www.linkedin.com/in/jonathan-kakesa-3970832b2/" target="_blank" rel="noreferrer" class="social-link">LinkedIn</a>
+                        <a href="https://www.facebook.com/jonathan.kakesa.14/" target="_blank" rel="noreferrer" class="social-link">Facebook</a>
                     </div>
                 </div>
-            </a>
-            {% endfor %}
-        </div>
-        
-        <div class="text-center mt-12">
-            <a href="{{ url_for('projects') }}" class="bg-electric-blue hover:bg-blue-500 text-dark-bg font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
-                Voir tous les projets
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Services Preview -->
-<section class="py-20 bg-dark-card">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4 gradient-text">Mes Services</h2>
-            <p class="text-lg text-gray-400">Solutions complètes pour votre transformation digitale</p>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="text-center p-6 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-2">Développement Web</h3>
-                <p class="text-gray-400 text-sm">Applications web modernes et performantes</p>
-            </div>
-            
-            <div class="text-center p-6 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-2">Intelligence Artificielle</h3>
-                <p class="text-gray-400 text-sm">Intégration d'IA dans vos processus</p>
-            </div>
-            
-            <div class="text-center p-6 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-2">Automatisation</h3>
-                <p class="text-gray-400 text-sm">Optimisation de vos workflows</p>
-            </div>
-            
-            <div class="text-center p-6 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-bold mb-2">Consulting</h3>
-                <p class="text-gray-400 text-sm">Accompagnement stratégique tech</p>
-            </div>
-        </div>
-        
-        <div class="text-center mt-12">
-            <a href="{{ url_for('services') }}" class="border-2 border-electric-blue text-electric-blue hover:bg-electric-blue hover:text-dark-bg font-bold py-3 px-8 rounded-lg transition-all duration-300">
-                Découvrir tous les services
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-{% if testimonials %}
-<section class="py-20">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4 gradient-text">Témoignages Clients</h2>
-            <p class="text-lg text-gray-400">Ce que disent mes clients de notre collaboration</p>
-        </div>
-        
-        <div class="testimonials-carousel max-w-4xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-8">
-                {% for testimonial in testimonials %}
-                <div class="testimonial-card bg-dark-card p-8 rounded-lg border border-dark-border">
-                    <div class="flex items-center mb-4">
-                        {% for i in range(testimonial.rating) %}
-                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                        </svg>
-                        {% endfor %}
-                    </div>
-                    <p class="text-gray-300 mb-6 italic">"{{ testimonial.message }}"</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gradient-to-r from-electric-blue to-blue-600 rounded-full flex items-center justify-center text-dark-bg font-bold mr-4">
-                            {{ testimonial.client_name[0] }}
-                        </div>
-                        <div>
-                            <div class="font-bold">{{ testimonial.client_name }}</div>
-                            {% if testimonial.company %}
-                            <div class="text-gray-400 text-sm">{{ testimonial.company }}</div>
-                            {% endif %}
+                {% if hero_project %}
+                <div class="project-preview hero-preview" style="background-image: url('{{ hero_project.image }}');">
+                    <div class="p-6 flex flex-col h-full justify-end">
+                        <p class="text-xs uppercase tracking-[0.35em] text-slate">{{ hero_project.category }}</p>
+                        <h3 class="text-2xl font-semibold text-white mt-2">{{ hero_project.title }}</h3>
+                        <p class="text-slate mt-3">{{ hero_project.summary }}</p>
+                        <div class="flex items-center gap-4 mt-6">
+                            <a href="{{ hero_project.case_url }}" target="_blank" rel="noreferrer" class="text-aurora text-sm">Étude</a>
+                            <a href="{{ hero_project.github_url }}" target="_blank" rel="noreferrer" class="text-aurora text-sm">GitHub</a>
                         </div>
                     </div>
                 </div>
+                {% endif %}
+            </div>
+        </div>
+        {% if partner_network %}
+        <div class="hero-ribbon">
+            <span>Partenariats actifs</span>
+            <div class="flex flex-wrap gap-3 text-xs text-slate uppercase tracking-[0.25em]">
+                {% for partner in partner_network[:6] %}
+                    <span>{{ partner.name }}</span>
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
     </div>
 </section>
-{% endif %}
 
-<!-- CTA Section -->
-<section class="py-20 bg-gradient-to-r from-electric-blue to-blue-600">
-    <div class="container mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold mb-4 text-dark-bg">Prêt à transformer votre idée en réalité ?</h2>
-        <p class="text-lg mb-8 text-dark-bg/80">Discutons de votre projet et créons ensemble quelque chose d'extraordinaire</p>
-        <a href="{{ url_for('contact') }}" class="bg-dark-bg text-electric-blue font-bold py-4 px-8 rounded-lg hover:bg-gray-900 transition-all duration-300 transform hover:scale-105">
-            Commencer un projet
-        </a>
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+            <div>
+                <p class="badge text-slate mb-3">Domaines d'excellence</p>
+                <h2 class="text-3xl font-semibold">Un studio multidisciplinaire pour vos idées ambitieuses</h2>
+            </div>
+            <p class="text-slate text-sm max-w-xl">De la conception logicielle à la mécatronique, je conçois des produits alignés sur les enjeux business, techniques et humains.</p>
+        </div>
+        <div class="focus-grid">
+            <div class="focus-card" data-animate="glow">
+                <p class="text-xs uppercase tracking-[0.35em] text-slate mb-3">01 • Plateformes & IA</p>
+                <h3>Produits digitaux augmentés</h3>
+                <ul>
+                    <li>Plateformes web & mobile (Flask, Next.js).</li>
+                    <li>Copilotes et agents IA propriétaires (Azure OpenAI, LangChain).</li>
+                    <li>Analytics et monitoring en temps réel.</li>
+                </ul>
+            </div>
+            <div class="focus-card">
+                <p class="text-xs uppercase tracking-[0.35em] text-slate mb-3">02 • Robotique & mécatronique</p>
+                <h3>Du prototype au banc de test</h3>
+                <ul>
+                    <li>Bras robotique 6 DOF, STM32, ROS2.</li>
+                    <li>Systèmes embarqués & vision industrielle.</li>
+                    <li>Intégration cloud pour supervision.</li>
+                </ul>
+            </div>
+            <div class="focus-card">
+                <p class="text-xs uppercase tracking-[0.35em] text-slate mb-3">03 • Leadership & delivery</p>
+                <h3>Stratégie produit & mentoring</h3>
+                <ul>
+                    <li>Ateliers C-level, coaching CTO/CPTO.</li>
+                    <li>Playbooks delivery, QA et sécurité.</li>
+                    <li>Programmes académiques & bootcamps.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-12 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 rounded-[32px] glass-panel grid lg:grid-cols-3 gap-10 p-10">
+        <div>
+            <p class="badge text-slate">Cognito Inc.</p>
+            <h2 class="text-3xl font-semibold mt-2">Studio premium & product leadership</h2>
+            <p class="text-slate mt-4">Nous embarquons designers, développeurs, data scientists et experts IA pour livrer des expériences ambitieuses.</p>
+        </div>
+        <div class="space-y-4">
+            <div class="stat-chip rounded-2xl p-5">
+                <p class="text-white font-semibold">Architecture produit</p>
+                <p class="text-slate text-sm mt-2">Vision, roadmaps, ateliers exécutifs, branding et design system.</p>
+            </div>
+            <div class="stat-chip rounded-2xl p-5">
+                <p class="text-white font-semibold">Engineering & IA</p>
+                <p class="text-slate text-sm mt-2">Plateformes web/mobile, IA générative, pipelines data, DevOps.</p>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <div class="stat-chip rounded-2xl p-5">
+                <p class="text-white font-semibold">Growth & opérations</p>
+                <p class="text-slate text-sm mt-2">Lancement, automatisation marketing/vente, monitoring KPI.</p>
+            </div>
+            <div class="stat-chip rounded-2xl p-5">
+                <p class="text-white font-semibold">Mentoring & transmission</p>
+                <p class="text-slate text-sm mt-2">Masterclass, programmes étudiants, accompagnement founders.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-10">
+        <div class="flex flex-wrap items-center justify-between gap-6">
+            <div>
+                <p class="badge text-slate mb-3">Projects spotlight</p>
+                <h2 class="text-3xl font-semibold">Programmation, mécatronique et IA</h2>
+                <p class="text-slate mt-2">Chaque carte mène vers une étude et un repository GitHub.</p>
+            </div>
+            <a href="{{ url_for('projects') }}" class="text-aurora text-sm">Catalogue complet →</a>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+            {% for spotlight in spotlight_projects %}
+                <div class="project-preview" style="background-image: url('{{ spotlight.image }}');">
+                    <div class="p-6 flex flex-col h-full justify-end">
+                        <p class="text-xs uppercase tracking-[0.35em] text-slate">{{ spotlight.category }}</p>
+                        <h3 class="text-2xl font-semibold text-white mt-2">{{ spotlight.title }}</h3>
+                        <p class="text-slate mt-3">{{ spotlight.summary }}</p>
+                        <div class="flex flex-wrap gap-2 mt-4 text-xs text-slate">
+                            {% for tech in spotlight.tech %}
+                                <span class="badge-pill">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="flex items-center gap-4 mt-6">
+                            <a href="{{ spotlight.case_url }}" target="_blank" rel="noreferrer" class="text-aurora text-sm">Détails</a>
+                            <a href="{{ spotlight.github_url }}" target="_blank" rel="noreferrer" class="text-aurora text-sm">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-10">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+            <div>
+                <p class="badge text-slate mb-3">Expériences en production</p>
+                <h2 class="text-3xl font-semibold">Sites et produits Cognito Inc.</h2>
+            </div>
+            <span class="text-slate text-sm">Cognito-inc.ca • ULC Cognito • PrimaPhoto • Cognito Chatt • Lyft ICC • Green-Kin</span>
+        </div>
+        <div class="grid lg:grid-cols-3 gap-6">
+            {% for site in portfolio_sites[:6] %}
+                <div class="project-card rounded-3xl p-6 h-full flex flex-col">
+                    <div class="flex items-center justify-between text-xs text-slate mb-3">
+                        <span>{{ site.status }}</span>
+                        <span>{{ site.sector }}</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">{{ site.name }}</h3>
+                    <p class="text-slate flex-1">{{ site.description }}</p>
+                    <div class="flex flex-wrap gap-2 mt-4 text-xs text-slate">
+                        {% for tech in site.stack %}
+                            <span class="badge-pill text-[0.65rem]">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="mt-6 flex items-center justify-between text-sm">
+                        <span class="text-slate">Signature Cognito</span>
+                        <a href="{{ site.url }}" target="_blank" rel="noreferrer" class="text-aurora hover:underline">Visiter</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+        <div class="flex flex-wrap items-end justify-between gap-6">
+            <div>
+                <p class="badge text-slate mb-3">Open source</p>
+                <h2 class="text-3xl font-semibold">Ce que je partage sur GitHub</h2>
+                <p class="text-slate mt-2">Mécatronique, IA, plateformes media et outils de productivité.</p>
+            </div>
+            <a href="{{ github_profile.html_url }}" target="_blank" rel="noreferrer" class="text-aurora hover:underline">Profil complet →</a>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+            {% for repo in github_repos %}
+                <div class="project-card rounded-3xl p-6 flex flex-col">
+                    <div class="flex items-center justify-between mb-3 text-sm text-slate">
+                        <span>{{ repo.language or 'Multi-stack' }}</span>
+                        <span>{{ repo.stargazers_count }} ★</span>
+                    </div>
+                    <h3 class="text-xl font-semibold">{{ repo.name }}</h3>
+                    <p class="text-slate mt-2 flex-1">{{ repo.description or "Projet open-source Cognito" }}</p>
+                    <div class="mt-4 flex items-center justify-between text-sm">
+                        <span class="text-slate">Màj {{ repo.pushed_at[:10] if repo.pushed_at else '' }}</span>
+                        <a href="{{ repo.html_url }}" target="_blank" rel="noreferrer" class="text-aurora hover:underline">Explorer</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 space-y-10">
+        <div class="flex flex-wrap items-center justify-between gap-6">
+            <div>
+                <p class="badge text-slate mb-3">Paroles clients</p>
+                <h2 class="text-3xl font-semibold">Collaborer, c'est co-créer</h2>
+            </div>
+            <a href="{{ url_for('contact') }}" class="text-aurora text-sm">Briefer un projet →</a>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6">
+            {% for testimonial in testimonials %}
+                <div class="testimonial-card rounded-3xl p-6">
+                    <p class="text-slate mb-4 italic">“{{ testimonial.message }}”</p>
+                    <div>
+                        <p class="text-white font-semibold">{{ testimonial.client_name }}</p>
+                        <p class="text-xs uppercase tracking-[0.35em] text-slate mt-1">{{ testimonial.company }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-span-full glass-panel rounded-3xl p-8 text-center text-slate">
+                    Les témoignages apparaîtront dès leur validation via l'admin.
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-20 section-trigger">
+    <div class="max-w-5xl mx-auto px-6 text-center glass-panel rounded-[32px] p-12">
+        <p class="badge text-slate mb-3">Prêt pour la suite ?</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mb-4">Ingénierie, IA, mécatronique, produits digitaux – on construit ?</h2>
+        <p class="text-slate mb-8 text-lg">Un brief suffit. Nous alignons la vision, la roadmap et l'équipe.</p>
+        <div class="flex flex-wrap gap-4 justify-center">
+            <a href="{{ url_for('contact') }}" class="px-6 py-3 rounded-full bg-aurora text-midnight font-semibold shadow-glow">Planifier un call</a>
+            <a href="{{ url_for('services') }}" class="px-6 py-3 rounded-full border border-white/20">Voir mes services</a>
+        </div>
     </div>
 </section>
 {% endblock %}

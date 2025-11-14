@@ -1,276 +1,166 @@
 {% extends "base.html" %}
 
-{% block title %}À propos - Jonathan Kakesa | Cognito Inc.{% endblock %}
+{% block title %}À propos — Jonathan Kakesa{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="py-20 bg-gradient-to-r from-dark-bg to-dark-card">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-5xl font-bold mb-6 gradient-text">À propos de moi</h1>
-            <p class="text-xl text-gray-300">Entrepreneur, Innovateur & Visionnaire Technologique</p>
-        </div>
-    </div>
-</section>
-
-<!-- Main Content -->
-<section class="py-20">
-    <div class="container mx-auto px-6">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
-            <!-- Profile Image -->
-            <div class="text-center lg:text-left">
-                <div class="w-80 h-80 mx-auto lg:mx-0 rounded-2xl bg-gradient-to-r from-electric-blue to-blue-600 p-1">
-                    <div class="w-full h-full rounded-2xl bg-dark-bg flex items-center justify-center">
-                        <div class="w-72 h-72 rounded-2xl bg-gradient-to-r from-gray-700 to-gray-800 flex items-center justify-center text-8xl font-bold gradient-text">
-                            JK
-                        </div>
-                    </div>
+<section class="py-20 section-trigger">
+    <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+            <p class="badge text-slate">Vision</p>
+            <h1 class="text-4xl font-semibold">Ingénieur de formation, passionné de programmation et d'innovation.</h1>
+            <p class="text-slate text-lg leading-relaxed">
+                J'ai fondé Cognito Inc. pour relier stratégie produit, ingénierie logicielle, mécatronique et IA. Je dirige des
+                missions avec AWS, Microsoft Azure, Railway, Polytechnique Montréal ou l'Université Loyola du Congo-ICAM pour
+                créer des plateformes utiles et élégantes.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="stat-chip rounded-2xl p-5">
+                    <p class="text-3xl font-semibold">4</p>
+                    <p class="text-xs uppercase tracking-[0.3em] text-slate mt-2">Années d'expérience</p>
+                </div>
+                <div class="stat-chip rounded-2xl p-5">
+                    <p class="text-3xl font-semibold">70</p>
+                    <p class="text-xs uppercase tracking-[0.3em] text-slate mt-2">Produits livrés</p>
+                </div>
+                <div class="stat-chip rounded-2xl p-5 col-span-2">
+                    <p class="text-3xl font-semibold">{{ github_profile.public_repos or 0 }}</p>
+                    <p class="text-xs uppercase tracking-[0.3em] text-slate mt-2">Repos open-source</p>
                 </div>
             </div>
-            
-            <!-- Biography -->
+        </div>
+        <div class="glass-panel rounded-[32px] p-8 space-y-6">
             <div>
-                <h2 class="text-3xl font-bold mb-6 gradient-text">Jonathan Kakesa</h2>
-                <div class="space-y-6 text-gray-300 leading-relaxed">
-                    <p>
-                        Je suis Jonathan Kakesa, entrepreneur passionné, développeur full-stack et fondateur de 
-                        <span class="gradient-text font-semibold">Cognito Inc.</span>, une entreprise innovante 
-                        spécialisée dans le développement d'applications web et d'outils d'intelligence artificielle.
-                    </p>
-                    
-                    <p>
-                        Avec plus de 5 années d'expérience dans l'écosystème technologique, j'ai eu l'opportunité 
-                        de travailler avec des startups ambitieuses et des entreprises établies pour transformer 
-                        leurs visions en solutions digitales concrètes et performantes.
-                    </p>
-                    
-                    <p>
-                        Ma philosophie repose sur l'innovation constante, l'excellence technique et la création 
-                        de valeur durable. Chez Cognito Inc., nous ne nous contentons pas de développer des 
-                        applications - nous créons des expériences qui révolutionnent la façon dont les 
-                        entreprises interagissent avec la technologie.
-                    </p>
-                    
-                    <p>
-                        Spécialisé dans les technologies modernes comme Python, Flask, React, et l'intelligence 
-                        artificielle, je m'efforce de rester à la pointe des dernières innovations pour offrir 
-                        à mes clients des solutions qui les propulsent vers l'avenir.
-                    </p>
-                </div>
+                <p class="text-xs uppercase tracking-[0.35em] text-slate mb-2">Rôles clés</p>
+                <ul class="space-y-2 text-slate">
+                    <li>• CEO & Chief Product Architect — Cognito Inc.</li>
+                    <li>• Advisor IA & Innovation — AWS, Microsoft Azure, Railway.</li>
+                    <li>• Facilitateur académique — Polytechnique Montréal, ULC-ICAM, ICAM.</li>
+                </ul>
+            </div>
+            <div>
+                <p class="text-xs uppercase tracking-[0.35em] text-slate mb-2">Focus géographiques</p>
+                <p class="text-white">Montréal • Toronto • Paris • Kinshasa</p>
+            </div>
+            <div>
+                <p class="text-xs uppercase tracking-[0.35em] text-slate mb-2">Industries servies</p>
+                <p class="text-white">Éducation, mobilité, énergie, retail créatif, foi & médias.</p>
+            </div>
+            <div class="flex flex-wrap gap-3 pt-4">
+                <a href="https://www.linkedin.com/in/jonathan-kakesa-3970832b2/" target="_blank" rel="noreferrer" class="social-link">
+                    LinkedIn
+                </a>
+                <a href="https://www.facebook.com/jonathan.kakesa.14/" target="_blank" rel="noreferrer" class="social-link">
+                    Facebook
+                </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Skills & Expertise -->
-<section class="py-20 bg-dark-card">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4 gradient-text">Expertise & Compétences</h2>
-            <p class="text-lg text-gray-400">Technologies et domaines de spécialisation</p>
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-3 gap-6">
+        <div class="service-card rounded-3xl p-6">
+            <p class="badge text-slate mb-4">ADN produit</p>
+            <h3 class="text-2xl font-semibold mb-2">Stratégie + Craft</h3>
+            <p class="text-slate">Roadmaps, ateliers de décision, gouvernance produit, cadrage branding & data.</p>
         </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Frontend -->
-            <div class="bg-dark-bg p-8 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4 text-center">Frontend Development</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">React</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Vue.js</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">JavaScript</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">TypeScript</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">TailwindCSS</span>
-                </div>
-            </div>
-            
-            <!-- Backend -->
-            <div class="bg-dark-bg p-8 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4 text-center">Backend Development</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Python</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Flask</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Django</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Node.js</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">PostgreSQL</span>
-                </div>
-            </div>
-            
-            <!-- AI & ML -->
-            <div class="bg-dark-bg p-8 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4 text-center">Intelligence Artificielle</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">TensorFlow</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">OpenAI API</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Scikit-learn</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Pandas</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">NumPy</span>
-                </div>
-            </div>
-            
-            <!-- Cloud & DevOps -->
-            <div class="bg-dark-bg p-8 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4 text-center">Cloud & DevOps</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">AWS</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Docker</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Git</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">CI/CD</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Linux</span>
-                </div>
-            </div>
-            
-            <!-- Mobile -->
-            <div class="bg-dark-bg p-8 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4 text-center">Mobile Development</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">React Native</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Flutter</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">PWA</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Ionic</span>
-                </div>
-            </div>
-            
-            <!-- Business -->
-            <div class="bg-dark-bg p-8 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300">
-                <div class="w-16 h-16 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-4 text-center">Business & Strategy</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Product Strategy</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Startup Consulting</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Tech Leadership</span>
-                    <span class="bg-electric-blue/20 text-electric-blue px-3 py-1 rounded-full text-sm">Innovation</span>
-                </div>
-            </div>
+        <div class="service-card rounded-3xl p-6">
+            <p class="badge text-slate mb-4">Ingénierie</p>
+            <h3 class="text-2xl font-semibold mb-2">Stack Cognito</h3>
+            <p class="text-slate">Python, Flask, FastAPI, Next.js, cloud AWS/Azure, micro-services, LangChain.</p>
+        </div>
+        <div class="service-card rounded-3xl p-6">
+            <p class="badge text-slate mb-4">Communauté</p>
+            <h3 class="text-2xl font-semibold mb-2">Transmission</h3>
+            <p class="text-slate">Mentoring de jeunes talents, conférences, programmes Foi & Tech, podcasts.</p>
         </div>
     </div>
 </section>
 
-<!-- Company Links -->
-<section class="py-20">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4 gradient-text">Cognito Inc.</h2>
-            <p class="text-lg text-gray-400">Découvrez notre entreprise et nos réalisations</p>
+<section class="py-16 section-trigger">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-10">
+            <p class="badge text-slate mb-3">Timeline</p>
+            <h2 class="text-3xl font-semibold">Moments clés des projets Cognito</h2>
         </div>
-        
-        <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <!-- Website -->
-            <a href="#" target="_blank" class="group bg-dark-card p-8 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300 transform hover:scale-105 text-center">
-                <div class="w-16 h-16 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <svg class="w-8 h-8 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9"></path>
-                    </svg>
+        <div class="timeline">
+            {% for milestone in venture_milestones %}
+                <div class="timeline-item">
+                    <p class="text-xs uppercase tracking-[0.35em] text-slate">{{ milestone.year }}</p>
+                    <h3 class="text-xl font-semibold mt-2">{{ milestone.title }}</h3>
+                    <p class="text-slate mt-2">{{ milestone.details }}</p>
                 </div>
-                <h3 class="text-xl font-bold mb-2 gradient-text">Site Officiel</h3>
-                <p class="text-gray-400">Découvrez Cognito Inc.</p>
-            </a>
-            
-            <!-- Facebook -->
-            <a href="#" target="_blank" class="group bg-dark-card p-8 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300 transform hover:scale-105 text-center">
-                <div class="w-16 h-16 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <svg class="w-8 h-8 text-electric-blue" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2 gradient-text">Facebook</h3>
-                <p class="text-gray-400">Suivez nos actualités</p>
-            </a>
-            
-            <!-- GitHub -->
-            <a href="#" target="_blank" class="group bg-dark-card p-8 rounded-lg border border-dark-border hover:border-electric-blue transition-all duration-300 transform hover:scale-105 text-center">
-                <div class="w-16 h-16 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center group-hover:bg-electric-blue/30 transition-colors">
-                    <svg class="w-8 h-8 text-electric-blue" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2 gradient-text">GitHub</h3>
-                <p class="text-gray-400">Code open source</p>
-            </a>
+            {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- Values & Mission -->
-<section class="py-20 bg-dark-card">
-    <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 gradient-text">Ma Mission</h2>
-                <p class="text-lg text-gray-400">Les valeurs qui guident mon travail</p>
+<section class="py-16 section-trigger">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-8">
+        <div class="glass-panel rounded-[32px] p-8 space-y-6">
+            <p class="badge text-slate">Champs d'expertise</p>
+            <div class="space-y-4 text-slate">
+                <div>
+                    <h3 class="text-xl text-white">Plateformes & IA</h3>
+                    <p>Architectures sur-mesure, intégration d'agents conversationnels et copilotes métiers.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl text-white">Product leadership</h3>
+                    <p>Aligner C-level, orchestrer discovery/delivery, mesurer la valeur business et utilisateur.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl text-white">Growth & opérations</h3>
+                    <p>Lancer des funnels automatisés, orchestrer marketing/vente, mettre en place du reporting.</p>
+                </div>
             </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                        <svg class="w-10 h-10 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
+        </div>
+        <div class="glass-panel rounded-[32px] p-8">
+            <p class="badge text-slate mb-4">Empreinte</p>
+            <div class="space-y-4 text-slate">
+                {% for site in portfolio_sites %}
+                    <div class="flex items-center justify-between border-b border-white/5 pb-3">
+                        <div>
+                            <p class="text-white font-semibold">{{ site.name }}</p>
+                            <p class="text-xs uppercase tracking-[0.3em] text-slate">{{ site.sector }}</p>
+                        </div>
+                        <a href="{{ site.url }}" target="_blank" rel="noreferrer" class="text-aurora text-sm">Voir</a>
                     </div>
-                    <h3 class="text-xl font-bold mb-4 gradient-text">Innovation</h3>
-                    <p class="text-gray-400">Repousser les limites du possible avec des solutions créatives et avant-gardistes</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                        <svg class="w-10 h-10 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 gradient-text">Excellence</h3>
-                    <p class="text-gray-400">Livrer des solutions de qualité supérieure qui dépassent les attentes</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-electric-blue/20 rounded-full flex items-center justify-center">
-                        <svg class="w-10 h-10 text-electric-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 gradient-text">Collaboration</h3>
-                    <p class="text-gray-400">Travailler en étroite collaboration pour créer des solutions sur mesure</p>
+                {% endfor %}
+            </div>
+            <div class="mt-6">
+                <p class="text-xs uppercase tracking-[0.35em] text-slate mb-2">Partenaires</p>
+                <div class="flex flex-wrap gap-2 text-xs text-slate">
+                    {% for partner in partner_network %}
+                        <span class="badge-pill">{{ partner.name }}</span>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-20 bg-gradient-to-r from-electric-blue to-blue-600">
-    <div class="container mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold mb-4 text-dark-bg">Travaillons ensemble</h2>
-        <p class="text-lg mb-8 text-dark-bg/80">Prêt à transformer votre vision en réalité digitale ?</p>
-        <a href="{{ url_for('contact') }}" class="bg-dark-bg text-electric-blue font-bold py-4 px-8 rounded-lg hover:bg-gray-900 transition-all duration-300 transform hover:scale-105">
-            Discutons de votre projet
-        </a>
+<section class="py-20 section-trigger">
+    <div class="max-w-6xl mx-auto px-6 glass-panel rounded-[32px] p-10">
+        <div class="flex flex-wrap items-center justify-between gap-6 mb-8">
+            <div>
+                <p class="badge text-slate mb-3">Veille & open-source</p>
+                <h2 class="text-3xl font-semibold">Quelques dépôts en vitrine</h2>
+            </div>
+            <a href="{{ github_profile.html_url }}" target="_blank" rel="noreferrer" class="text-aurora text-sm">Github.com/{{ github_username }}</a>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            {% for repo in github_repos %}
+                <div class="project-card rounded-3xl p-6">
+                    <p class="text-xs uppercase tracking-[0.3em] text-slate mb-1">{{ repo.language or 'polyglotte' }}</p>
+                    <h3 class="text-lg font-semibold">{{ repo.name }}</h3>
+                    <p class="text-slate mt-2">{{ repo.description or 'Expérimentation Cognito.' }}</p>
+                    <div class="flex items-center justify-between text-xs text-slate mt-4">
+                        <span>{{ repo.stargazers_count }} ★</span>
+                        <a href="{{ repo.html_url }}" target="_blank" rel="noreferrer" class="text-aurora">Ouvrir</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 {% endblock %}
